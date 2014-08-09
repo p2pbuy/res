@@ -1,7 +1,7 @@
 $(function(){
 	$('#payment').click(function(){
 		if(confirm('确定要付款吗？确定后订单会锁定')){
-			var result = MAIN.common.getData($('#payment'),'action-data');
+			var result = MAIN.getData($('#payment'),'action-data');
 			takeorder(result.boid,result.biduid,result.bidprice,result.bid);
 
 			location.href='https://shenghuo.alipay.com/send/payment/fill.htm';
@@ -14,8 +14,8 @@ $(function(){
 			biduid : _biduid,
 			bidprice : _bidprice,
 			bid : _bid,
-		},function(data){
+		},function( json ){
 			return;
-		});
+		}, 'json' );
 	}
 });
