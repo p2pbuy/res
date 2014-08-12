@@ -87,7 +87,7 @@ th,td{padding:10px;}th{text-align:left;}
 #purchase_complete_title{color:#067505;background:#dddddd;padding:16px;line-height: 16px;margin-bottom:20px;}
 .purchase_detail{list-style: none;font-size:12px;padding:0px;margin-left:20px;}
 .purchase_detail li{margin-bottom: 10px;color:#555555;}
-.item_content{padding:0px; margin-left:20px;margin-top:0px;width:1024px;}
+.item_content{padding:0px; margin-left:20px;margin-top:0px;width:512px;}
 
 .item_content li{list-style:none;float:left; padding:0px;}
 .item_content_details{width:500px;font-size:14px;padding-bottom:12px;}
