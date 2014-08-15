@@ -55,14 +55,14 @@ $(function($){
     	'createOrder' : function ( e ) {
     		e.preventDefault();
     		var _thirdurl = $('[node-type=thirdurl]').val();
-    		var i = _thirdurl.indexOf('http');
-    		if( i == -1){
-    			_thirdurl = 'http://'+_thirdurl;
-    		}
 
     		if(!_thirdurl){
     			location.href=AJ.createOrder;
     		}else{
+    			var i = _thirdurl.indexOf('http');
+        		if( i == -1){
+        			_thirdurl = 'http://'+_thirdurl;
+        		}
     			$.post( AJ.amazon, {
     				amazonurl : _thirdurl,
     			}, function ( json ) {
