@@ -65,7 +65,7 @@ $(function($){
     };
     
     var evtInit = function () {
-    	$('#u17').delegate( '[action-type=create_order]', 'click', funcList.createOrder );
+    	$('#search_tool').delegate( '[action-type=create_order]', 'click', funcList.createOrder );
     };
     // 执行初始化
     init();
