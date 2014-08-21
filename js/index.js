@@ -2,7 +2,9 @@ $(function($){
 	//AJ 接口
 	var AJ = {
 			'createOrder' : '/order/buy',
+			'createOrderTest' : '/order/create',
 			'amazon' : '/aj/third/amazon',
+			'amazonGetgoods' : '/aj/third/amazon/getgoods',
 	};
 	// 处理方法列表
     var funcList = {
@@ -57,7 +59,38 @@ $(function($){
         		}, 'json' );
     		}
     		return true;
-    	}
+    	},
+    	//发布需求
+    	'createOrderTest' : function ( e ) {
+    		e.preventDefault();
+    		var _thirdurl = $('[node-type=thirdurl]').val();
+    		if(!_thirdurl){
+    			alert('请输入商品的链接');
+    			return;
+    		}
+    		var i = _thirdurl.indexOf('http');
+    		if( i == -1){
+    			_thirdurl = 'http://'+_thirdurl;
+    		}
+
+    		if(!_thirdurl){
+    			location.href=AJ.createOrder;
+    		}else{
+    			$.post( AJ.amazonGetgoods, {
+    				amazonurl : _thirdurl,
+    			}, function ( json ) {
+        			if( json.code == 100000 ) {
+        				var inputStr = funcList.inputCreator( json.data );
+        				var formN = $('<form action="'+AJ.createOrderTest+'" method="post">'+ inputStr +'</form>').appendTo('body');
+        				formN[0].submit();
+        			}else{
+        				alert('地址有问题，请重新填写');
+        				return false;
+        			}
+        		}, 'json' );
+    		}
+    		return true;
+    	},
     }
 	// 模块主初始化方法
     var init = function () {
@@ -66,6 +99,7 @@ $(function($){
     
     var evtInit = function () {
     	$('#search_tool').delegate( '[action-type=create_order]', 'click', funcList.createOrder );
+    	$('#search_tool').delegate( '[action-type=create_order_test]', 'click', funcList.createOrderTest );
     };
     // 执行初始化
     init();
