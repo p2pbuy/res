@@ -27,11 +27,11 @@ $(function () {
 
 	
     MAIN.getData = function ( node, attrName ) {
-		var act_data = $(node).attr( attrName || 'act_data' ) || '';
-		if( !act_data ) {
+		var action_data = $(node).attr( attrName || 'action_data' ) || '';
+		if( !action_data ) {
 			return {};
 		}
-		var dataArr = act_data.split('&');
+		var dataArr = action_data.split('&');
 		var result = {};
 		for(var i in dataArr){
 			var item = dataArr[i];
