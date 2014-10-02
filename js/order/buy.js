@@ -19,10 +19,10 @@ $(function(){
     			alert('请输入商品描述');
     			return false;
     		}
-    		if(!_price){
+    		/*if(!_price){
     			alert('请输入商品价格');
     			return false;
-    		}
+    		}*/
     		if(!_quantity){
     			alert('请输入商品数量');
     			return false;

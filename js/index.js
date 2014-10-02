@@ -1,9 +1,9 @@
 $(function($){
 	//AJ 接口
 	var AJ = {
-			//'createOrder' : '/order/buy',
+			'createOrder' : '/order/buy',
 			//'createOrderTest' : '/order/create',
-			'createOrder' : '/order/create',
+			//'createOrder' : '/order/create',
 			'amazon' : '/aj/third/amazon',
 			'amazonGetgoods' : '/aj/third/amazon/getgoods',
 	};
@@ -78,6 +78,13 @@ $(function($){
     		if(!_thirdurl){
     			location.href=AJ.createOrder;
     		}else{
+    			var data = new Object();
+    			data.thirdurl = _thirdurl;
+    			var inputStr = funcList.inputCreator( data );
+    			var formN = $('<form action="'+AJ.createOrder+'" method="post">'+ inputStr +'</form>').appendTo('body');
+				formN[0].submit();
+    			//解析地址
+    			/*
     			$.post( AJ.amazonGetgoods, {
     				amazonurl : _thirdurl,
     			}, function ( json ) {
@@ -90,6 +97,7 @@ $(function($){
         				return false;
         			}
         		}, 'json' );
+        		*/
     		}
     		return true;
     	},
