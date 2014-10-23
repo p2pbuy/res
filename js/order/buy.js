@@ -32,7 +32,7 @@ $(function(){
     			'cbk' : function ( data ) {
     				if( data.code == 100000 ) {
         				alert('创建成功');
-        				location.reload();
+        				location.href="/order/myorder";
         				return true;
         			}else if(data.code == 102001){
         				alert(data.msg);
