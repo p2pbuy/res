@@ -41,6 +41,29 @@ $(function () {
 		return result;
 	};
 	
+	MAIN.setData = function ( node, attrName, data ) {
+		var action_data = $(node).attr( attrName || 'action_data' ) || '';
+		if( !action_data ) {
+			return {};
+		}
+		
+		var str = '';
+        var temp = [];
+        var isEncode = false;
+        for (var i in data) {
+            var tempV = data[i].toString();
+            if ( isEncode ) {
+                i = encodeURIComponent( i );
+                tempV = encodeURIComponent( tempV );
+            }
+            temp[temp.length] = (i + '=' + tempV);
+            temp[temp.length] = ( '&' );
+        }
+        temp.pop(); // 弹出最后一个&
+        str = temp.join('');
+        return str;
+	}
+	
 	// 表单提交不跳页
 	MAIN.formUp = function ( formNode, conf ) {
         var config = MAIN.parseObj( {
