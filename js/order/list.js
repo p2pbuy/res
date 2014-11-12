@@ -28,6 +28,7 @@ $(function($){
 			if(obj.code == 100000){
 				$('#orderLists').append(obj.data.html);
 			}else{
+				$('#pager').html('');
 				alert('已经没有了');
 			}
 		});

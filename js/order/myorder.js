@@ -20,22 +20,42 @@ $(function(){
 							}
 							
 							if(obj[i]['isshow'] == '1'){
-								_checked = 'checked="checked"';
+								_isshow = '<a href="javascript:void(0);" class="btn btn-primary" action-type="isshow" action-data="boid=' + obj[i]['boid'] + '&isshow=0">关闭</a>';
 							}else{
-								_checked = '';
+								_isshow = '<a href="javascript:void(0);" class="btn btn-primary" action-type="isshow" action-data="boid=' + obj[i]['boid'] + '&isshow=1">开放</a>';
 							}
-							_html += '<ul class="item_content_details" id="allOrderInfo">';
-							_html += '<img src="' + _img + '" alt="item1" height="135px" width="220px" class="item_content_image"/>';
-							_html += '<li>我也买不了，展示给别人吧<input type="checkbox" action-type="isshow" ' + _checked + '></li>';
-							_html += '<li action-data="boid=' + obj[i]['boid'] + '">订单ID：' + obj[i]['boid'] + '</li>';
-							_html += '<li>订单名称：' + obj[i]['title'] + '</li>';
-							_html += '<li>订单描述：' + obj[i]['description'] + '</li>';
-							_html += '<li>商品价格：' + obj[i]['price'] + '</li>';
-							_html += '<li>商品数量：' + obj[i]['quantity'] + '</li>';
-							_html += '<li>补充说明：' + obj[i]['additional'] + '</li>';
-							_html += '<li>创建时间：' + obj[i]['createtime'] + '</li>';
+							
+							_html += '<li>';
+							_html += '<div class="order-num">订单号：';
+							_html += '<span class="number">' + obj[i]['boid'] + '</span>';
+							_html += '<span class="time">' + obj[i]['createtime'] + '</span>';
+							_html += '</div>';
+							_html += '<ul class="inline">';
+							_html += '<li class="a clearfix">';
+							_html += '<div class="pic">';
+							_html += '<img src="' + _img + '" alt="">';
+							_html += '</div>';
+							_html += '<div class="detail">';
+							_html += '<div class="name"><em>订单名：</em><span>' + obj[i]['title'] + '</span></div>';
+							_html += '<div class="num"><em>订单描述：</em><span>' + obj[i]['description'] + '</span></div>';
+							_html += '<div class="num"><em>数量：</em><span>' + obj[i]['quantity'] + '</span></div>';
+							_html += '<div class="num"><em>备注：</em><span>' + obj[i]['additional'] + '</span></div>';
+							_html += '</div>';
+							_html += '</li>';
+							_html += '<li class="b">￥' + obj[i]['price'] + '</li>';
+							_html += '<li class="c">';
+							_html += '<small>';
+							_html += '</small>';
+							_html += '</li>';
+							_html += '<li class="d">';
+							_html += '<small>';
+							_html += _isshow;
+							_html += '<a href="/order/takeorder?boids=' + obj[i]['boid'] + '" target="_blank" class="btn">接单</a>';
+							_html += '</small>';
+							_html += '</li>';
 							_html += '</ul>';
-							_html += '</br>';
+							_html += '</li>';
+							
 							$('#allOrderInfos').html(_html);
 						}
 					}
@@ -45,32 +65,117 @@ $(function(){
 		return true;
 	});
 	
+	//buyer查看更多订单
+	var _page = 2;
+	$('[action-type=getmoreallorder]').click(function(){
+		var _count = 5;
+		
+		$.post('/aj/order/getmoreorderjson',{
+			page : _page,
+			count : _count,
+		},function( json ){
+			if(json.code == 100000){
+				var _html = '';
+				obj = json.data;
+				var _img = '';
+				var _checked = '';
+				for( var i in obj){
+					if(obj.hasOwnProperty(i)){
+						if(obj[i]['img']){
+							_img = obj[i]['img'];
+						}else{
+							_img = '/img/usa.png';
+						}
+						
+						if(obj[i]['isshow'] == '1'){
+							_isshow = '<a href="javascript:void(0);" class="btn btn-primary" action-type="isshow" action-data="boid=' + obj[i]['boid'] + '&isshow=0">关闭</a>';
+						}else{
+							_isshow = '<a href="javascript:void(0);" class="btn btn-primary" action-type="isshow" action-data="boid=' + obj[i]['boid'] + '&isshow=1">开放</a>';
+						}
+						
+						_html += '<li>';
+						_html += '<div class="order-num">订单号：';
+						_html += '<span class="number">' + obj[i]['boid'] + '</span>';
+						_html += '<span class="time">' + obj[i]['createtime'] + '</span>';
+						_html += '</div>';
+						_html += '<ul class="inline">';
+						_html += '<li class="a clearfix">';
+						_html += '<div class="pic">';
+						_html += '<img src="' + _img + '" alt="">';
+						_html += '</div>';
+						_html += '<div class="detail">';
+						_html += '<div class="name"><em>订单名：</em><span>' + obj[i]['title'] + '</span></div>';
+						_html += '<div class="num"><em>订单描述：</em><span>' + obj[i]['description'] + '</span></div>';
+						_html += '<div class="num"><em>数量：</em><span>' + obj[i]['quantity'] + '</span></div>';
+						_html += '<div class="num"><em>备注：</em><span>' + obj[i]['additional'] + '</span></div>';
+						_html += '</div>';
+						_html += '</li>';
+						_html += '<li class="b">￥' + obj[i]['price'] + '</li>';
+						_html += '<li class="c">';
+						_html += '<small>';
+						_html += '</small>';
+						_html += '</li>';
+						_html += '<li class="d">';
+						_html += '<small>';
+						_html += _isshow;
+						_html += '<a href="/order/takeorder?boids=' + obj[i]['boid'] + '" target="_blank" class="btn">接单</a>';
+						_html += '</small>';
+						_html += '</li>';
+						_html += '</ul>';
+						_html += '</li>';
+						
+					}
+				}
+				$('#allOrderInfos').append(_html);
+				_page = _page + 1;
+			}
+		}, 'json' );
+		return true;
+	});
 	// 处理方法列表
     var funcList = {
-    		//选择收获地址
+    		//查找订单
     		'isshow' : function ( e ) {
     			var el = $(e.currentTarget);
-    			var result = MAIN.getData(el.parent().next(),'action-data');
-    			var ischeck = el.context.checked;
-    			
-    			if(ischeck){
-    				ischeck = 1;
-    			}else{
-    				ischeck = 0;
-    			}
+    			var result = MAIN.getData(el,'action-data');
     			
     			$.post('/aj/order/publicorder',{
     				boid : result.boid,
-    				isshow : ischeck,
+    				isshow : result.isshow,
     			},function( json ){
     				if(json.code == 100000){
-    					alert('更新成功！');
+    					if(result.isshow == 1){
+    						el.html('关闭');
+    						el.attr("action-data","boid=" + result.boid + "&isshow=0");
+    					}else{
+    						el.attr("action-data","boid=" + result.boid + "&isshow=1");
+    						el.html('开放');
+    					}
     				}
     			}, 'json' );
     			
     			return;
     		},
-
+    		//取消订单
+    		'cancelOrder' : function ( e ) {
+    			var el = $(e.currentTarget);
+    			var result = MAIN.getData(el,'action-data');
+    			var _boid = result.boid;
+    			
+    			if(confirm("确定要取消吗？")){
+    				$.post('/aj/order/cancelorder',{
+        				boid : result.boid,
+        			},function( json ){
+        				if(json.code == 100000){
+        					el.parent().parent().parent().parent().remove();
+        				}else{
+        					alert(json.msg);
+        				}
+        			}, 'json' );
+    			}
+    			
+    			return;
+    		},
     }
 	
 	// 模块主初始化方法
@@ -80,6 +185,7 @@ $(function(){
     
     var evtInit = function () {
     	$('#allorder').delegate( '[action-type=isshow]', 'click', funcList.isshow );
+    	$('#myorder').delegate( '[action-type=cancelorder]', 'click', funcList.cancelOrder );
     };
     // 执行初始化
     init();

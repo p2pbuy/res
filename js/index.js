@@ -81,7 +81,7 @@ $(function($){
     			var data = new Object();
     			data.thirdurl = _thirdurl;
     			var inputStr = funcList.inputCreator( data );
-    			var formN = $('<form action="'+AJ.createOrder+'" method="post">'+ inputStr +'</form>').appendTo('body');
+    			var formN = $('<form action="'+AJ.createOrder+'" method="get">'+ inputStr +'</form>').appendTo('body');
 				formN[0].submit();
     			//解析地址
     			/*
