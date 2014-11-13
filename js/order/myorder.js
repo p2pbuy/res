@@ -51,6 +51,7 @@ $(function(){
 							_html += '<small>';
 							_html += _isshow;
 							_html += '<a href="/order/takeorder?boids=' + obj[i]['boid'] + '" target="_blank" class="btn">接单</a>';
+							_html += '<a href="javascript:void(0);" class="btn" action-type="delorder" action-data="boid=' + obj[i]['boid'] + '">删除订单</a>';
 							_html += '</small>';
 							_html += '</li>';
 							_html += '</ul>';
@@ -119,6 +120,7 @@ $(function(){
 						_html += '<small>';
 						_html += _isshow;
 						_html += '<a href="/order/takeorder?boids=' + obj[i]['boid'] + '" target="_blank" class="btn">接单</a>';
+						_html += '<a href="javascript:void(0);" class="btn" action-type="delorder" action-data="boid=' + obj[i]['boid'] + '">删除订单</a>';
 						_html += '</small>';
 						_html += '</li>';
 						_html += '</ul>';
@@ -176,6 +178,26 @@ $(function(){
     			
     			return;
     		},
+    		//删除订单
+    		'delOrder' : function ( e ) {
+    			var el = $(e.currentTarget);
+    			var result = MAIN.getData(el,'action-data');
+    			var _boid = result.boid;
+    			
+    			if(confirm("确定要删除吗？")){
+    				$.post('/aj/order/delorder',{
+        				boid : result.boid,
+        			},function( json ){
+        				if(json.code == 100000){
+        					el.parent().parent().parent().parent().remove();
+        				}else{
+        					alert(json.msg);
+        				}
+        			}, 'json' );
+    			}
+    			
+    			return;
+    		},
     }
 	
 	// 模块主初始化方法
@@ -186,6 +208,7 @@ $(function(){
     var evtInit = function () {
     	$('#allorder').delegate( '[action-type=isshow]', 'click', funcList.isshow );
     	$('#myorder').delegate( '[action-type=cancelorder]', 'click', funcList.cancelOrder );
+    	$('#allorder').delegate( '[action-type=delorder]', 'click', funcList.delOrder );
     };
     // 执行初始化
     init();
