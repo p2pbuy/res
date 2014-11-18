@@ -66,13 +66,15 @@ $(function($){
     	'createOrder' : function ( e ) {
     		e.preventDefault();
     		var _thirdurl = $('[node-type=thirdurl]').val();
-    		if(!_thirdurl){
+    		/*if(!_thirdurl){
     			alert('请输入商品的链接');
     			return;
-    		}
-    		var i = _thirdurl.indexOf('http');
-    		if( i == -1){
-    			_thirdurl = 'http://'+_thirdurl;
+    		}*/
+    		if(_thirdurl){
+	    		var i = _thirdurl.indexOf('http');
+	    		if( i == -1){
+	    			_thirdurl = 'http://'+_thirdurl;
+	    		}
     		}
 
     		if(!_thirdurl){

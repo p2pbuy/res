@@ -8,8 +8,10 @@ $(function(){
     var funcList = {
     	'bidBuyOrder' : function ( e ) {
     		var el = $(e.currentTarget);
+    		var result = MAIN.getData(el,'action-data');
     		var _bidprice = $('[node-type=bidprice]').val();
-    		var _boid = $('[node-type=boid]').val();
+    		var _boid = result.boid;
+
     		if(!_bidprice){
     			alert('请输入竞价价格');
     			return false;
@@ -25,7 +27,7 @@ $(function(){
     			//console.log(json);
     			if( json.code == 100000 ) {
     				alert('竞价成功');
-    				location.href='/';
+    				location.href='/order/list';
     				return true;
     			}else{
     				alert(json.msg);
@@ -40,7 +42,7 @@ $(function(){
     };
     
     var evtInit = function () {
-    	$('#bidbuyorder_form').delegate( '[action-type=bidBuyOrder]', 'click', funcList.bidBuyOrder );
+    	$('#bidbuyorder').delegate( '[action-type=bidBuyOrder]', 'click', funcList.bidBuyOrder );
     };
     // 执行初始化
     init();
