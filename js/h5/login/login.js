@@ -22,7 +22,7 @@ $(function($){
 						location.href="/";
 					}
 				}else{
-					$('[node-type=passwdErr]').show();
+					alert('账号或者密码错误');
 				}
 				return;
 			}, 'json' );
