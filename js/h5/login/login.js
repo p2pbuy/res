@@ -19,7 +19,7 @@ $(function($){
 					if(_backurl){
 						location.href=_backurl;
 					}else{
-						location.href="/";
+						location.href="/order/myorder";
 					}
 				}else{
 					alert('账号或者密码错误');

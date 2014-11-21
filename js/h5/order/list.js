@@ -4,6 +4,9 @@ $(function($){
 		var _page = 1;
 		var bufferTimer,
 			buffer = 200;
+		var scrolltop=document.documentElement.scrollTop||document.body.scrollTop;
+		window.onscroll = function() { console.log('ww')};
+		
 		$(window).scroll(function(){
 			bufferTimer && clearTimeout( bufferTimer );
 			bufferTimer = setTimeout( function () {
@@ -20,6 +23,7 @@ $(function($){
 		});
 	}
 	function getmore(_page, _count){
+		alert(_page,_count);return;
 		$.post('/aj/order/getmoreorder',{
 			page : _page,
 			count : _count,
