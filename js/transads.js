@@ -10,9 +10,11 @@ $(function($){
     		var _thirdurl = $('[node-type=thirdurl]').val();
     		
     		if(_thirdurl){
-    			alert('http://p2pbuy.net/order/buy?thirdurl=' + encodeURIComponent(_thirdurl));
+    			location.href = 'http://p2pbuy.net/order/buy?thirdurl=' + encodeURIComponent(_thirdurl);
+    			//alert('http://p2pbuy.net/order/buy?thirdurl=' + encodeURIComponent(_thirdurl));
     		}else{
-    			alert('http://p2pbuy.net/order/buy');
+    			location.href = 'http://p2pbuy.net/order/buy';
+    			//alert('http://p2pbuy.net/order/buy');
     		}
     		
     		return true;

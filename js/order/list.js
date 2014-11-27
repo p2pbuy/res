@@ -23,6 +23,7 @@ $(function($){
 		$.post('/aj/order/getmoreorder',{
 			page : _page,
 			count : _count,
+			isshow : 1,
 		},function(data){
 			var obj = eval('(' + data + ')');
 			if(obj.code == 100000){

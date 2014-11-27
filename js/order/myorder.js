@@ -37,7 +37,7 @@ $(function(){
 							_html += '</div>';
 							_html += '<div class="detail">';
 							_html += '<div class="name"><em>订单名：</em><span>' + obj[i]['title'] + '</span></div>';
-							_html += '<div class="num"><em>订单描述：</em><span>' + obj[i]['description'] + '</span></div>';
+							_html += '<div class="num"><em>商品URL：</em><span><a href="' + obj[i]['thirdurl'] + '" target="_blank">' + obj[i]['thirdurl'] + '</a></span></div>';
 							_html += '<div class="num"><em>数量：</em><span>' + obj[i]['quantity'] + '</span></div>';
 							_html += '<div class="num"><em>备注：</em><span>' + obj[i]['additional'] + '</span></div>';
 							_html += '</div>';
@@ -106,7 +106,7 @@ $(function(){
 						_html += '</div>';
 						_html += '<div class="detail">';
 						_html += '<div class="name"><em>订单名：</em><span>' + obj[i]['title'] + '</span></div>';
-						_html += '<div class="num"><em>订单描述：</em><span>' + obj[i]['description'] + '</span></div>';
+						_html += '<div class="num"><em>商品URL：</em><span><a href="' + obj[i]['thirdurl'] + '" target="_blank">' + obj[i]['thirdurl'] + '</a></span></div>';
 						_html += '<div class="num"><em>数量：</em><span>' + obj[i]['quantity'] + '</span></div>';
 						_html += '<div class="num"><em>备注：</em><span>' + obj[i]['additional'] + '</span></div>';
 						_html += '</div>';

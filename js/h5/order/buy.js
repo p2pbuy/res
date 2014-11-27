@@ -11,7 +11,7 @@ $(function(){
     		var _description = $('[node-type=description]').val();
     		var _price = $('[node-type=price]').val();
     		var _quantity = $('[node-type=quantity]').val();
-    		if(!_title){
+    		/*if(!_title){
     			alert('请输入订单标题');
     			return false;
     		}
@@ -19,7 +19,7 @@ $(function(){
     			alert('请输入商品描述');
     			return false;
     		}
-    		/*if(!_price){
+    		if(!_price){
     			alert('请输入商品价格');
     			return false;
     		}*/
