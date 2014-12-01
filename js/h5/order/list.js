@@ -38,20 +38,19 @@ $(function($){
 						}else{
 							_img = '/img/usa.png';
 						}
-						_html += '<li class="order-item line-bottom">';
+						_html += '<li class="order-item line-all">';
 						_html += '<h3 class="tit"><em class="txt-ca">订单号：</em><span class="txt-cb">' + objdata[i]['boid'] + '</span></h3>';
 						_html += '<div class="media-graphic layout-flexbox">';
 						_html += '<div class="mod-media size-m">';
 						_html += '<img src="' + _img + '" alt="">';
 						_html += '</div>';
 						_html += '<div class="item-list box-col">';
-						_html += '<div class="item-main txt-ca">' + objdata[i]['title'] + '</div>';
-						_html += '<div class="item-minor txt-cb">' + objdata[i]['description'] + '</div>';
-						_html += '<div class="item-minor txt-cb">价格：￥' + objdata[i]['price'] + '</div>';
+						_html += '<div class="item-minor txt-cb">订单详情：<a href="/order/show?boid=' + objdata[i]['boid'] + '" target="_blank">' + objdata[i]['boid'] + '</a></div>',
+						_html += '<div class="item-minor txt-cb">商品URL：' + objdata[i]['thirdurl'] + '</div>',
 						_html += '<div class="item-minor txt-cb">竞价中</div>';
 						_html += '</div>';
 						_html += '<div class="opt">';
-						_html += '<a href="/order/takeorder?boids=' + objdata[i]['boid'] + '" class="btn-line">我要竞价</a>';
+						_html += '<a href="/order/takeorder?boids=' + objdata[i]['boid'] + '" class="btn btn-orange">我要竞价</a>';
 						_html += '</div>';
 						_html += '</div>';
 						_html += '</li>';
