@@ -198,6 +198,30 @@ $(function(){
     			
     			return;
     		},
+    		//展示收货地址
+    		'showAddr' : function ( e ) {
+    			var el = $(e.currentTarget);
+    			var result = MAIN.getData(el,'action-data');
+    			var _html = '';
+    			
+    			$.post('/aj/order/getaddressbyidsjson',{
+    				ids : result.id,
+    			},function( json ){
+    				if(json.code == 100000){
+    					console.log(json.data[0]);
+    					_html += '<div class="alert" action-type="addrInfo">';
+    					_html += '<span>' + json.data[0]['country'] + json.data[0]['province'] + json.data[0]['city'] + json.data[0]['address'] + '   ' + json.data[0]['name'] + '   ' + json.data[0]['mobile'] + '</span>';
+    					_html += '</div>';
+    					el.parent().parent().append(_html);
+    				}
+    			}, 'json' );
+    			return;
+    		},
+    		//收起展示
+    		'displayAddr' : function ( e ) {
+    			var el = $(e.currentTarget);
+    			el.remove();
+    		},
     }
 	
 	// 模块主初始化方法
@@ -209,6 +233,8 @@ $(function(){
     	$('#allorder').delegate( '[action-type=isshow]', 'click', funcList.isshow );
     	$('#myorder').delegate( '[action-type=cancelorder]', 'click', funcList.cancelOrder );
     	$('#allorder').delegate( '[action-type=delorder]', 'click', funcList.delOrder );
+    	$('#tokenorder').delegate( '[action-type=showAddr]', 'mouseenter', funcList.showAddr );
+    	$('#tokenorder').delegate( '[action-type=addrInfo]', 'mouseleave', funcList.displayAddr );
     };
     // 执行初始化
     init();
