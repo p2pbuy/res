@@ -222,6 +222,21 @@ $(function(){
     			var el = $(e.currentTarget);
     			el.remove();
     		},
+    		//发货，变更订单状态
+    		'delivery' : function ( e ) {
+    			var el = $(e.currentTarget);
+    			var result = MAIN.getData(el,'action-data');
+    			
+    			$.post('/aj/order/sendorder',{
+    				boid : result.boid,
+    			},function( json ){
+    				if(json.code == 100000){
+    					alert('发货成功');
+    				}
+    			}, 'json' );
+    			
+    			return;
+    		}
     }
 	
 	// 模块主初始化方法
@@ -235,6 +250,7 @@ $(function(){
     	$('#allorder').delegate( '[action-type=delorder]', 'click', funcList.delOrder );
     	$('#tokenorder').delegate( '[action-type=showAddr]', 'mouseenter', funcList.showAddr );
     	$('#tokenorder').delegate( '[action-type=addrInfo]', 'mouseleave', funcList.displayAddr );
+    	$('#tokenorder').delegate( '[action-type=delivery]', 'click', funcList.delivery );
     };
     // 执行初始化
     init();
